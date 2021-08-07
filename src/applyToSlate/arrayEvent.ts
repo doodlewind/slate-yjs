@@ -35,6 +35,7 @@ export default function translateArrayEvent(
       children.splice(offset, delta.delete ?? 0).forEach((node) => {
         ops.push({ type: 'remove_node', path, node });
       });
+      offset += delta.delete ?? 0;
     }
 
     if ('insert' in delta) {
@@ -56,7 +57,6 @@ export default function translateArrayEvent(
       });
 
       children.splice(offset, 0, ...toInsert);
-      offset += delta.insert.length;
     }
   });
 
